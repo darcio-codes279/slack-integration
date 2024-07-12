@@ -16,5 +16,5 @@ const botId = "marketing"
 const botIdSlack = "slack"
 
 async function handleSlackMessage(message) {
-    const userId
+
 }

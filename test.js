@@ -30,7 +30,7 @@ app.message('hello', async ({ message, say }) => {
     conversations[message.user] = { step: 'start' };
     console.log(conversations)
     // Make an API call to the coach app API endpoint for new chat user
-    const response = await fetch(newUserChatURL, {
+    const response = await fetch(URL, {
         method: 'POST', // or 'GET', 'PUT', 'DELETE', etc.
         headers: {
             'Content-Type': 'application/json',
@@ -38,7 +38,9 @@ app.message('hello', async ({ message, say }) => {
         },
         body: JSON.stringify({
             // Add any data you need to send to the API
-            bot_id: botId, // Add the bot_id from the message
+            bot_id: botId,
+            user_id: userID,
+            message: message.text // Add the bot_id from the message
         }),
     });
 
@@ -55,6 +57,7 @@ app.message('hello', async ({ message, say }) => {
     // Initialize conversation state
     conversations[message.user] = { step: 'askFirstName' };
 });
+
 app.message(async ({ message, say }) => {
     const user = message.user;
     const userConversation = conversations[user];

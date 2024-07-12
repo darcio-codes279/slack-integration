@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { App } = require('@slack/bolt');
 
 const app = new App({
@@ -10,60 +12,11 @@ const app = new App({
     port: process.env.PORT || 3000
 });
 
-const chatURL = "https://admin.coach.app/api/bots/chat";
-const newUserChatURL = "https://admin.coach.app/api/bots/chat-new-user";
-const BOT_IMG = "https://coach-admin-images.s3.eu-west-2.amazonaws.com/avatar.png";
-const PERSON_IMG = "https://coach-admin-images.s3.eu-west-2.amazonaws.com/avatar-generic.png";
-const BOT_NAME = "Rob";
-const PERSON_NAME = "Me";
-
-function initialiseChatOnAPI() {
-    let url = newUserChatURL;
-
-    const data = {
-        bot_id: botId,
-    };
-
-    fetch(url, {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify(data)
-    })
-        .then(function (response) {
-            return response.json();
-        })
-        .then(response => {
-            console.log(response);
-
-            if (response.user !== undefined) {
-                userId = response.user.id;
-
-                if (window.history.replaceState) {
-                    window.history.replaceState(null, document.title, "/personality-quiz/?userId=" + userId);
-                }
-            }
-
-            response.chat.forEach(
-                (response) => {
-                    const message = returnMessage(response);
-                    botResponse(message);
-                }
-            );
-            if (render === "true") {
-                toggleHideElement(msger);
-            }
-        });
-}
-
-
 // Listens to incoming messages that contain "hello"
-app.message('Hello', async ({ message, say }) => {
+app.message('hello', async ({ message, say }) => {
     // say() sends a message to the channel where the event was triggered
-
-    await say(`Hello <@${message.user}>!`);
-    await initialiseChatOnAPI
+    await say(`Hey there <@${message.user}>!`);
 });
-
 
 (async () => {
     // Start your app
@@ -71,5 +24,3 @@ app.message('Hello', async ({ message, say }) => {
 
     console.log('⚡️ Bolt app is running!');
 })();
-
-// simole fetch that calls api and gets response
