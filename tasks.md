@@ -1,1 +1,8 @@
 auth.user
+
+add:
+
+SLACK_SIGNING_SECRET=
+SLACK_BOT_TOKEN=
+SLACK_APP_TOKEN=
+
