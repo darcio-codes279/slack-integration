@@ -48,6 +48,5 @@ app.message(async ({ message, say }) => {
 (async () => {
     // Start your app
     await app.start();
-
     console.log('⚡️ Bolt app is running!');
 })()
